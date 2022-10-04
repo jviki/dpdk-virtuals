@@ -1,0 +1,15 @@
+FROM alpine:edge
+
+ARG playbook=dpdk_devel
+ENV LANG en_US.UTF-8
+
+WORKDIR /work
+CMD ["/bin/sh"]
+
+COPY ansible /ansible
+
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+	&& apk update \
+	&& apk add python3 ansible
+RUN ANSIBLE_LOCALHOST_WARNING=False \
+	ansible-playbook -b /ansible/${playbook}.yml -i /dev/null
