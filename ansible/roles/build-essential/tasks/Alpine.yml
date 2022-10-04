@@ -1,0 +1,8 @@
+---
+- name: install
+  apk:
+    name:
+      - gcc
+      - make
+      - cmake
+    state: present

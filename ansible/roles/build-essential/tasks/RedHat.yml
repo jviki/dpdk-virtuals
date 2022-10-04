@@ -1,0 +1,8 @@
+---
+- name: install
+  dnf:
+    name:
+      - gcc
+      - make
+      - cmake
+    state: present

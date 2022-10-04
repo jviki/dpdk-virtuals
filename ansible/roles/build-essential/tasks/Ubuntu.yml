@@ -1,0 +1,7 @@
+---
+- name: install
+  apt:
+    name:
+      - build-essential
+      - cmake
+    state: present
