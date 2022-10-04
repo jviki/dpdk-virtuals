@@ -1,0 +1,3 @@
+---
+dpdk_install_dev: no
+dpdk_install_tools: no

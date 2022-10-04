@@ -1,0 +1,17 @@
+---
+- name: install
+  apk:
+    name: dpdk
+    state: present
+
+- name: install tools
+  apk:
+    name: dpdk-test
+    state: present
+  when: dpdk_install_tools
+
+- name: install dev
+  apk:
+    name: dpdk-dev
+    state: present
+  when: dpdk_install_dev

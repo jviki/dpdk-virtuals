@@ -1,0 +1,11 @@
+---
+- name: install
+  dnf:
+    name: dpdk
+    state: present
+
+- name: install dev
+  dnf:
+    name: dpdk-devel
+    state: present
+  when: dpdk_install_dev
