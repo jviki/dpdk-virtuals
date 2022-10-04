@@ -1,0 +1,14 @@
+FROM ubuntu:22.04
+
+ARG playbook=dpdk_devel
+ENV LANG en_US.UTF-8
+
+WORKDIR /work
+CMD ["/bin/bash"]
+
+COPY ansible /ansible
+
+RUN apt-get update -y \
+	&& apt-get install -y python3 python3-apt ansible
+RUN ANSIBLE_LOCALHOST_WARNING=False \
+	ansible-playbook -b /ansible/${playbook}.yml -i /dev/null
