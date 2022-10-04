@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - build-essential
+    - pciutils
+    - role: dpdk
+      dpdk_install_dev: yes
+      dpdk_install_tools: yes
+    - tcpreplay
+    - scapy
+    - strace
