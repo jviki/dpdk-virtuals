@@ -1,0 +1,5 @@
+---
+- name: install
+  apk:
+    name: tcpreplay
+    state: present
