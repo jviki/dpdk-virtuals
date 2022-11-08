@@ -1,0 +1,5 @@
+---
+- name: install oracle-epel-release-el{{ansible_distribution_major_version}}
+  dnf:
+    name: "oracle-epel-release-el{{ansible_distribution_major_version}}"
+    state: present
