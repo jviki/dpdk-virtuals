@@ -1,0 +1,5 @@
+---
+- name: install
+  apt:
+    name: pciutils
+    state: present
