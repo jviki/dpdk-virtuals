@@ -1,0 +1,10 @@
+---
+- name: install
+  ansible.builtin.copy:
+    src: "{{item}}"
+    dest: "/usr/local/bin/{{item}}"
+    mode: "u=rx,g=rx,o=rwx"
+    owner: root
+  loop:
+    - in-docker
+    - in-container

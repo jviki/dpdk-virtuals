@@ -1,0 +1,18 @@
+#! /bin/sh
+
+test -z "${IN_DOCKER_IMAGE}" && IN_DOCKER_IMAGE=jviki/ubuntu-dpdk:latest
+test -z "${IN_DOCKER_NAME}" && IN_DOCKER_NAME=dpdk
+test -z "${IN_DOCKER_OPTS}" && IN_DOCKER_OPTS="--rm -it"
+
+docker run \
+	--privileged \
+	--name "${IN_DOCKER_NAME}" \
+	-v `pwd`:/work \
+	-v /dev/hugepages:/dev/hugepages \
+	-v /sys/bus/pci/devices:/sys/bus/pci/devices \
+	-v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+	-v /sys/devices/system/node:/sys/devices/system/node \
+	-v /lib/modules:/lib/modules \
+	${IN_DOCKER_OPTS} \
+	"${IN_DOCKER_IMAGE}" \
+	"$@"

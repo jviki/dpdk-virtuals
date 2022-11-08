@@ -1,0 +1,9 @@
+#! /bin/sh
+
+test -z "${IN_CONTAINER_NAME}" && IN_CONTAINER_NAME=dpdk
+test -z "${IN_CONTAINER_OPTS}" && IN_CONTAINER_OPTS="-it"
+
+docker exec \
+	"${IN_CONTAINER_OPTS}" \
+	"${IN_CONTAINER_NAME}" \
+	"$@"
