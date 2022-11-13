@@ -1,0 +1,9 @@
+---
+- name: fetch ubuntu-dpdk
+  community.docker.docker_image:
+    name: "{{item}}"
+    source: pull
+  loop:
+    - jviki/ubuntu-dpdk:latest
+    - jviki/oracle-dpdk:latest
+    - jviki/alpine-dpdk:latest
