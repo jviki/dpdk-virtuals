@@ -1,0 +1,29 @@
+---
+- name: docker
+  include_tasks: "{{item}}"
+  with_first_found:
+    - "{{ansible_distribution}}-{{ansible_distribution_version}}.yml"
+    - "{{ansible_distribution}}.yml"
+    - "{{ansible_os_family}}.yml"
+    - "default.yml"
+
+- name: docker started
+  ansible.builtin.service:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: detect user group docker
+  ansible.builtin.shell: |
+    id -Gn \
+      | awk '!found && /docker/ {for (i = 1; i < NF; ++i) {if ($i == "docker") {print "yes"; found=1}}} END {if (!found) print "no";}'
+  become: no
+  register: user_group_docker
+
+- name: put user into group docker
+  ansible.builtin.user:
+    name: "{{ansible_user_id}}"
+    groups: docker
+    append: yes
+    state: present
+  when: user_group_docker.stdout != "yes"
